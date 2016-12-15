@@ -2,30 +2,22 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
-	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
 	<link rel="stylesheet" href="./main.css">
+	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
 </head>
 <body>
-	<select id="type">
-		<option value="video">video</option>
-		<option value="photo">photo</option>
-	</select>
-	<select id="size">
-		<option value="10">10</option>
-		<option value="20">20</option>
-	</select>
+
 	<input type="text" id="name" value="banytam">
-	<button id="get">获取</button>
+	<button id="get">喜欢</button>
 	<style type="text/css">
 		
 	</style>
 	<ul id="cont">
 
 	</ul>
-</body>
-<script type="text/javascript">
+	<script>
 	var limit=1,limitLike=1;
-	var size=$("#size").val();
+	var size=20;
 	var ajaxIng=false;
 		$("#get").click(function(){
 			limit=1;
@@ -40,24 +32,16 @@
 			}
 		})
 		function getCont(){
-			var type=$("#type").val()
 			ajaxIng=true;
 			$.ajax({
-				url:"/getcont",
+				url:"/getLike",
 				data:{
 					name:$("#name").val(),
-					type:type,
 					offset:(limit-1)*size,
 					limit:limit*size
 				}
 			}).done(function(d){
-				try{
-				var data=JSON.parse(d).response.posts,html=""
-			}catch(e){
-				alert(e)
-			}
-				switch(type){
-					case "video":
+				var data=JSON.parse(d).response.liked_posts,html=""
 						for(var i=0,l=data.length;i<l;i++){
 							var obj=data[i]
 							html+='\
@@ -67,20 +51,6 @@
 								<span>'+obj.video_url+'</span>\
 								</li>'
 						}
-					break;
-					case "photo":
-						for(var i=0,l=data.length;i<l;i++){
-							var obj=data[i]
-							for(var x=0,xl=obj.photos.length;x<xl;x++){
-								var photo=obj.photos[x]
-								html+='\
-								<li class="photo">\
-									<img src="'+(photo.original_size?photo.original_size.url:"")+'">\
-								</li>'
-							}
-						}
-					break;
-				}
 				ajaxIng=false;
 				if(limit>1){
 				$("#cont").append(html)
@@ -92,4 +62,5 @@
 			})
 		}
 	</script>
+</body>
 </html>

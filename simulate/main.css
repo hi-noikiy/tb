@@ -1,0 +1,28 @@
+*{
+			margin:0;
+			padding: 0;
+		}
+		#cont{
+			width: 80%;
+		}
+		li{
+			width:100%;
+			float: left;
+		}
+		li img{
+			width:20%;
+			float: left;
+		}
+		li video{
+			width: 80%;
+			float: left;
+		}
+		li span{
+			width: 100%;
+			margin:10px 0;
+			float: left;
+		}
+		li.photo img{
+			width:80%;
+			float: left;
+		}

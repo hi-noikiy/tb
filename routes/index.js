@@ -24,4 +24,13 @@ router.get('/getcont', function(req, res, next) {
 	});
 });
 
+router.get('/getLike', function(req, res, next) {
+	 request({uri:"https://api.tumblr.com/v2/blog/"+req.param('name')+
+		".tumblr.com/likes?api_key=MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc&limit="+(req.param('limit')||20)+
+		"&offset="+req.param('offset'||0),encoding: null}, function (error, response, body) {
+	    var html1=iconv.decode(body, 'utf8');
+  		res.send(html1);
+	});
+});
+
 module.exports = router;
