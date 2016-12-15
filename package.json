@@ -1,0 +1,17 @@
+{
+  "name": "get",
+  "version": "0.0.1",
+  "description": "get data",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.72.0"
+  },
+  "devDependencies": {
+    "iconv-lite": "^0.4.13"
+  }
+}
