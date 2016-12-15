@@ -1,0 +1,35 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\soft\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'start' ]
+2 info using npm@3.10.6
+3 info using node@v6.2.0
+4 verbose stack Error: Failed to parse json
+4 verbose stack Unexpected token 'b' at 10:6
+4 verbose stack     "body-parser": "~1.15.1",
+4 verbose stack      ^
+4 verbose stack     at parseError (C:\Users\Administrator\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:390:11)
+4 verbose stack     at parseJson (C:\Users\Administrator\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:79:23)
+4 verbose stack     at C:\Users\Administrator\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:48:5
+4 verbose stack     at C:\Users\Administrator\AppData\Roaming\npm\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:78:16
+4 verbose stack     at tryToString (fs.js:449:3)
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:436:12)
+5 verbose cwd E:\gitWeb\tb
+6 error Windows_NT 6.1.7601
+7 error argv "D:\\soft\\nodejs\\node.exe" "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run" "start"
+8 error node v6.2.0
+9 error npm  v3.10.6
+10 error file E:\gitWeb\tb\package.json
+11 error code EJSONPARSE
+12 error Failed to parse json
+12 error Unexpected token 'b' at 10:6
+12 error     "body-parser": "~1.15.1",
+12 error      ^
+13 error File: E:\gitWeb\tb\package.json
+14 error Failed to parse package.json data.
+14 error package.json must be actual JSON, not just JavaScript.
+14 error
+14 error This is not a bug in npm.
+14 error Tell the package author to fix their package.json file. JSON.parse
+15 verbose exit [ 1, true ]

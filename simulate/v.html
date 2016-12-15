@@ -1,15 +1,117 @@
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
 </head>
 <body>
-	<script type="text/javascript">
-		$.ajax({
-			url:"https://api.tumblr.com/v2/blog/scipsy.tumblr.com/info?api_key=MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc"
-		}).done(function(d){
-			console.log(d)
-		})
-	</script>
+	<select id="type">
+		<option value="video">video</option>
+		<option value="photo">photo</option>
+	</select>
+	<input type="text" id="name" value="banytam"><button id="get">获取</button>
+
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+		}
+		#cont{
+			width: 80%;
+		}
+		li{
+			width:100%;
+			float: left;
+		}
+		li img{
+			width:20%;
+			float: left;
+		}
+		li video{
+			width: 80%;
+			float: left;
+		}
+		li span{
+			width: 100%;
+			float: left;
+		}
+		li.photo img{
+			width:80%;
+			float: left;
+		}
+	</style>
+	<ul id="cont">
+
+	</ul>
 </body>
+<script type="text/javascript">
+	var limit=1;
+	var size=20;
+	var ajaxIng=false;
+		$("#get").click(function(){
+			limit=1;
+			getCont()
+		})
+		$(window).scroll(function(){
+			if($(document).height()<=($(window).scrollTop()+$(window).height())){
+				if(!ajaxIng){
+					limit++
+					getCont();
+				}
+			}
+		})
+		function getCont(){
+			var type=$("#type").val()
+			ajaxIng=true;
+			$.ajax({
+				url:"/getcont",
+				data:{
+					name:$("#name").val(),
+					type:type,
+					offset:(limit-1)*size,
+					limit:limit*size
+				}
+			}).done(function(d){
+				try{
+				var data=JSON.parse(d).response.posts,html=""
+			}catch(e){
+				alert(e)
+			}
+				switch(type){
+					case "video":
+						for(var i=0,l=data.length;i<l;i++){
+							var obj=data[i]
+							html+='\
+								<li>\
+								<video src="'+obj.video_url+'" controls="controls"></video>\
+								<img src="'+obj.thumbnail_url+'">\
+								<span>'+obj.video_url+'</span>\
+								</li>'
+						}
+					break;
+					case "photo":
+						for(var i=0,l=data.length;i<l;i++){
+							var obj=data[i]
+							for(var x=0,xl=obj.photos.length;x<xl;x++){
+								var photo=obj.photos[x]
+								html+='\
+								<li class="photo">\
+									<img src="'+(photo.original_size?photo.original_size.url:"")+'">\
+								</li>'
+							}
+							
+						}
+					break;
+				}
+				ajaxIng=false;
+				if(limit>1){
+				$("#cont").append(html)
+				}else{
+				$("#cont").html(html)
+				}
+			}).fail(function(){
+				ajaxIng=false;
+			})
+		}
+	</script>
 </html>
