@@ -33,4 +33,11 @@ router.get('/getLike', function(req, res, next) {
 	}); 
 });
 
+router.get('/saveHtml', function(req, res, next) {
+	 fs.writeFile('./file/'+req.query.name+'.html', `${req.query.html}`, (err) => {
+        if (err) throw err;
+        console.log('It\'s saved!');
+    });
+});
+
 module.exports = router;

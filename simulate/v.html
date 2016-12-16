@@ -25,7 +25,7 @@
 </body>
 <script type="text/javascript">
 	var limit=1,limitLike=1;
-	var size=$("#size").val();
+	var size=10;
 	var ajaxIng=false;
 		$("#get").click(function(){
 			limit=1;
@@ -40,6 +40,7 @@
 			}
 		})
 		function getCont(){
+			size=$("#size").val();
 			var type=$("#type").val()
 			ajaxIng=true;
 			$.ajax({

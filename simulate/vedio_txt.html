@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<link rel="stylesheet" href="./main.css">
+</head>
+</head>
+<body>
+
+	<input type="text" id="name" value="banytam">
+	<button id="get">获取</button>
+
+	<ul id="cont">
+
+	</ul>
+</body>
+<script type="text/javascript">
+
+	var limit=1;
+	var size=20;
+	var ajaxIng=false,count=0;
+	$("#get").click(function(){
+			getCont()
+	})
+	function getCont(){
+			var type=$("#type").val()
+			ajaxIng=true;
+			$.ajax({
+				url:"/getcont",
+				data:{
+					name:$("#name").val(),
+					type:"video",
+					offset:(limit-1)*size,
+					limit:limit*size
+				}
+			}).done(function(d){
+				try{
+					var data=JSON.parse(d).response.posts,html=""
+					count==0?count=JSON.parse(d).response.total_posts:"";
+					if(data.length<1){
+						$.ajax({
+							method:"post",
+							url:"/saveHtml",
+							data:{
+								html:$("#cont").html(),
+								name:$("#name").val()
+							}
+						})
+						return
+					}
+					for(var i=0,l=data.length;i<l;i++){
+						var obj=data[i]
+						if(obj.video_url){
+							html+='<li>'+obj.video_url+'</li>';
+						}
+					}
+					if(limit>1){
+						$("#cont").append(html)
+					}else{
+						$("#cont").html(html)
+					}
+					limit++
+					getCont()
+				}catch(e){
+					limit++
+					getCont()
+					console.log(e+",,,limit:"+limit)
+				}
+				
+			}).fail(function(){
+				/*limit++
+				getCont()*/
+			})
+		}
+</script>
+</html>
