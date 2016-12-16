@@ -43,7 +43,7 @@
 							method:"post",
 							url:"/saveHtml",
 							data:{
-								html:$("#cont").html()+"<li>"+failLimit.join(",")+"</li>",
+								html:$("#cont").html().replace(/https:\/\/vtt.tumblr.com/g,"*")+"<li>"+failLimit.join(",")+"</li>",
 								name:$("#name").val()
 							}
 						})
