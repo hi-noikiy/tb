@@ -58,6 +58,7 @@
 			}
 				switch(type){
 					case "video":
+						var mList=""
 						for(var i=0,l=data.length;i<l;i++){
 							var obj=data[i]
 							html+='\
@@ -65,8 +66,10 @@
 								<video src="'+obj.video_url+'" controls="controls"></video>\
 								<img src="'+obj.thumbnail_url+'">\
 								<span>'+obj.video_url+'</span>\
-								</li>'
+								</li>';
+							mList+="obj.video_url\n"
 						}
+						console.log(mList)
 					break;
 					case "photo":
 						for(var i=0,l=data.length;i<l;i++){

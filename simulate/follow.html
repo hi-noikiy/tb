@@ -8,7 +8,7 @@
 <body>
 
 	<input type="text" id="name" value="banytam">
-	<button id="get">喜欢</button>
+	<button id="get">获取喜欢</button>
 	<style type="text/css">
 		
 	</style>
@@ -42,6 +42,7 @@
 				}
 			}).done(function(d){
 				var data=JSON.parse(d).response.liked_posts,html=""
+						var mList=""
 						for(var i=0,l=data.length;i<l;i++){
 							var obj=data[i]
 							html+='\
@@ -49,8 +50,10 @@
 								<video src="'+obj.video_url+'" controls="controls"></video>\
 								<img src="'+obj.thumbnail_url+'">\
 								<span>'+obj.video_url+'</span>\
-								</li>'
+								</li>';
+							obj.video_url?(mList+=obj.video_url+"\n"):""
 						}
+						console.log(mList)
 				ajaxIng=false;
 				if(limit>1){
 				$("#cont").append(html)
