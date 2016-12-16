@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<input type="text" id="name" value="banytam">
+	<input type="text" id="name" value="acefuck">
 	<button id="get">获取</button>
 
 	<ul id="cont">
@@ -19,7 +19,7 @@
 
 	var limit=1;
 	var size=20;
-	var ajaxIng=false,count=0;
+	var ajaxIng=false,count=0,failLimit=[];
 	$("#get").click(function(){
 			getCont()
 	})
@@ -43,7 +43,7 @@
 							method:"post",
 							url:"/saveHtml",
 							data:{
-								html:$("#cont").html(),
+								html:$("#cont").html()+"<li>"+failLimit.join(",")+"</li>",
 								name:$("#name").val()
 							}
 						})
@@ -66,6 +66,7 @@
 					limit++
 					getCont()
 					console.log(e+",,,limit:"+limit)
+					failLimit.push(limit)
 				}
 				
 			}).fail(function(){
