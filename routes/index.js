@@ -30,7 +30,7 @@ router.get('/getLike', function(req, res, next) {
 		"&offset="+(req.query.offset||0)}, function (error, response, body) {
 	    var html1=iconv.decode(body, 'utf8');
   		res.send(html1);
-	});
+	}); 
 });
 
 module.exports = router;
