@@ -4,7 +4,7 @@ $(function(){
 			url:"/list"
 		}).done(function(d){
 			var htmlList=d.map(function(e){
-				return "<li>"+e+"</li>"
+				return "<li rel='"+e+"'>"+e+"</li>"
 			})
 			$("#list").html(htmlList.join(" "))
 		});

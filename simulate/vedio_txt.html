@@ -49,6 +49,12 @@
 								html:$("#cont").html().replace(/https:\/\/vtt.tumblr.com/g,"*")+"<li>"+failLimit.join(",")+"</li>",
 								name:$("#name").val()
 							}
+						}).done(function(d){
+							if(location.href.indexOf("auto")!=-1){
+								$("#list li[rel='"+$("#name").val()+"']").next().click();
+										limit=1;
+										getCont()
+							}
 						})
 						return
 					}
