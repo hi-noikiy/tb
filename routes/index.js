@@ -19,8 +19,13 @@ router.get('/getcont', function(req, res, next) {
 		"&offset="+(req.query.offset||0),
 	}
 	 request({uri:uri[req.query.type],encoding: null}, function (error, response, body) {
+	 	if(error){
+	 		console.log("ERROR:",error)
+	 		res.send(error);
+	 	}else{
 	    var html1=iconv.decode(body, 'utf8');
-  		res.send(html1);
+  			res.send(html1);
+	 	}
 	});
 });
 
