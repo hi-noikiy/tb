@@ -95,5 +95,13 @@
 				ajaxIng=false;
 			})
 		}
+		setTimeout(function(){
+$.ajax({
+				url:"/list"
+			}).done(function(d){
+				console.log(d)
+			});
+		},3000)
+		
 	</script>
 </html>
