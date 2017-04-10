@@ -12,6 +12,19 @@ var client = tumblr.createClient({
   token_secret: 'e5tPdEknmpoxrR4wjnDSjPzwjTMMZ1SZGimuZIudgfvS1ddXKw'
 });
 
+var follow=[]
+function getList(i){
+	client.userFollowing({offset:(i*20),limit:20},function(err, data) {
+		if(data.blogs.length>0){
+			data.blogs.forEach(function(e){
+				follow.push(e.name)
+			})
+			console.log(i)
+			getList(i+1)
+		}
+	});
+}
+getList(0)
 
 
 
@@ -21,48 +34,7 @@ router.get('/', function(req, res, next) {
   res.render('../syzjWeb/index.html', { title: 'Express' });
 });
 router.get('/list', function(req, res, next) {
-	for(let i=0;i<10;i++){
-		let promise = new Promise(function(resolve, reject) {
-			client.userFollowing({offset:(i*20),limit:20},function(err, data) {
-					resolve(data);	
-			});
-		})
-	}
-	    var follow=[],going=true;
-	let promise = new Promise(function(resolve, reject) {
-		client.userFollowing({offset:(i*20),limit:20},function(err, data) {
-					if(data.blogs.length<1){
-						console.log("back",data,follow)
-						going=false;
-						resolve(data,follow);
-					}else{
-						data.blogs.forEach(function(e){
-							follow.push(e.name)
-						})
-					}
-				});
-	})
-		for(let i=0;i<10;i++){
-			if(going){
-				client.userFollowing({offset:(i*20),limit:20},function(err, data) {
-					if(data.blogs.length<1){
-						console.log("back",data,follow)
-						going=false;
-						resolve(data,follow);
-					}else{
-						data.blogs.forEach(function(e){
-							follow.push(e.name)
-						})
-					}
-				});
-			}
-		}
-	});
-	promise.then((v1,v2) => {
-	  console.log(v1,v2);
-	  res.send(v2);
-	});
-  	
+	res.send(follow)
 });
 router.get('/getcont', function(req, res, next) {
 	var uri={

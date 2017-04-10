@@ -3,6 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="common.js"></script>
 	<link rel="stylesheet" href="./main.css">
 </head>
 <body>
@@ -19,6 +20,7 @@
 	<style type="text/css">
 		
 	</style>
+	<ul id="list" class="list"></ul>
 	<ul id="cont">
 
 	</ul>
@@ -95,13 +97,7 @@
 				ajaxIng=false;
 			})
 		}
-		setTimeout(function(){
-$.ajax({
-				url:"/list"
-			}).done(function(d){
-				console.log(d)
-			});
-		},3000)
+			
 		
 	</script>
 </html>

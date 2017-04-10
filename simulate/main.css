@@ -5,7 +5,7 @@
 		#cont{
 			width: 80%;
 		}
-		li{
+		#cont li{
 			width:100%;
 			float: left;
 		}
@@ -26,3 +26,11 @@
 			width:80%;
 			float: left;
 		}
+.list li{
+   float:left;
+   display: block;
+   margin:5px;
+   cursor: pointer;
+   border:1px solid #d0d0d0;
+   padding:5px;
+}
