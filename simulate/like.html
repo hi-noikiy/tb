@@ -38,7 +38,8 @@
 				data:{
 					name:$("#name").val(),
 					offset:(limit-1)*size,
-					limit:limit*size
+					limit:limit*size,
+					time:new Date().getTime()
 				}
 			}).done(function(d){
 				var data=JSON.parse(d).response.liked_posts,html=""

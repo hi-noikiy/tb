@@ -32,7 +32,7 @@ router.get('/getcont', function(req, res, next) {
 router.get('/getLike', function(req, res, next) {
 	 request({uri:"https://api.tumblr.com/v2/blog/"+req.query.name+
 		".tumblr.com/likes?api_key=MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc&limit="+(req.query.limit||20)+
-		"&offset="+(req.query.offset||0)}, function (error, response, body) {
+		"&before="+(req.query.time||0),encoding: null}, function (error, response, body) {
 	    var html1=iconv.decode(body, 'utf8');
   		res.send(html1);
 	}); 
