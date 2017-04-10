@@ -1,3 +1,3 @@
-启动页面：http://localhost/simulate/v.html
+脝么露炉脪鲁脙忙拢潞http://localhost/simulate/v.html
 
-启动方式 node bin/www
+鍚姩锛歯pm run start
