@@ -21,16 +21,35 @@ router.get('/', function(req, res, next) {
   res.render('../syzjWeb/index.html', { title: 'Express' });
 });
 router.get('/list', function(req, res, next) {
-	var promise = new Promise(function(resolve, reject) {
+	for(let i=0;i<10;i++){
+		let promise = new Promise(function(resolve, reject) {
+			client.userFollowing({offset:(i*20),limit:20},function(err, data) {
+					resolve(data);	
+			});
+		})
+	}
 	    var follow=[],going=true;
-		for(let i=0;i<10;i++){
-			if(going){
-				client.userFollowing({offset:0},function(err, data) {
-					if(!data){
+	let promise = new Promise(function(resolve, reject) {
+		client.userFollowing({offset:(i*20),limit:20},function(err, data) {
+					if(data.blogs.length<1){
+						console.log("back",data,follow)
 						going=false;
 						resolve(data,follow);
 					}else{
-						console.log(i)
+						data.blogs.forEach(function(e){
+							follow.push(e.name)
+						})
+					}
+				});
+	})
+		for(let i=0;i<10;i++){
+			if(going){
+				client.userFollowing({offset:(i*20),limit:20},function(err, data) {
+					if(data.blogs.length<1){
+						console.log("back",data,follow)
+						going=false;
+						resolve(data,follow);
+					}else{
 						data.blogs.forEach(function(e){
 							follow.push(e.name)
 						})

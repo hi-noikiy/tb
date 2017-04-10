@@ -6,20 +6,8 @@ var client = tumblr.createClient({
   token_secret: 'e5tPdEknmpoxrR4wjnDSjPzwjTMMZ1SZGimuZIudgfvS1ddXKw'
 });
 
-var follow=[],going=true;
-for(let i=0;i<100;i++){
-	if(going){
-		client.userFollowing({offset:(i*20)},function(err, data) {
-			if(!data){
-				going=false
-			}else{
-				data.blogs.forEach(function(e){
-					follow.push(e.name)
-				})
-			}
-		});
-	}
-}
-setTimeout(function(){
-	console.log(follow)
-},3000)
+client.userFollowing({offset:0,limit:20},function(err, data) {
+		data.blogs.forEach(function(e){
+			console.log(e.name)
+		})
+});
