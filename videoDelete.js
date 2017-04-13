@@ -1,6 +1,6 @@
 var fs=require("fs")
 
-fs.readdir("new",(err,files)=>{
+fs.readdir("./new",(err,files)=>{
 	var sizeArr=[],nameObj={};
 	files.forEach((e,i)=>{
 			var stat=fs.statSync("./new/"+e)
