@@ -8,7 +8,7 @@ fs.readdir("file",(err,files)=>{
    arr=html.split("</li><li>")
 
    //已下载列表
-   var downArr=fs.readdirSync("E:/迅雷下载/tb")
+   var downArr=fs.readdirSync("D:/bin/bin/tb")
    console.log(downArr)
 
    //去除非连接
