@@ -35,14 +35,13 @@ fs.readdir("file",(err,files)=>{
 
    console.log(newArr.length,arr.length)
 
-   arr.forEach((e,i)=>{
+   newArr.forEach((e,i)=>{
    		if(i%800==0){
-   			let newArr=arr.slice(i,(i+800))
-   			/*console.log(newArr.length)
-   			let html=+"<li>"+newArr.length+"</li>"+newArr.join("</li><li>")
+   			let arr=newArr.slice(i,(i+800))
+   			let html="<li>"+arr.length+"</li>"+arr.join("</li><li>")
    			 fs.writeFile('./1000file/total'+i+".html", html, (err) => {
 				  console.log('It\'s saved!');
-			   });*/
+			   });
    		}
    })
    let time=new Date().getTime()
