@@ -1,5 +1,5 @@
 var fs=require("fs")
-
+let time1=new Date().getTime()
 fs.readdir("file",(err,files)=>{
    var html="",arr=[],newArr=[];
    files.forEach((e,i)=>{
@@ -7,25 +7,31 @@ fs.readdir("file",(err,files)=>{
    })
    arr=html.split("</li><li>")
 
+   //已下载列表
+   var downArr=fs.readdirSync("E:/迅雷下载/tb")
+   console.log(downArr)
+
    //去除非连接
    arr.forEach((e,i)=>{
          if(e.indexOf("tumblr")!=-1){
-            newArr.push(e)
-         }
-   })
-   arr=[];
-   //去除重复连接
-   newArr.forEach((e,i)=>{
-      var canInt=true;
-         arr.forEach((q,y)=>{
-            if(q==e){
-               canInt=false;
+            var canInt=true;
+            newArr.forEach((q,y)=>{
+               if(q==e){
+                  canInt=false;
+               }
+            })
+
+            downArr.forEach((q,y)=>{
+               if(e.indexOf(q)!=-1){
+                  canInt=false;
+               }
+            })
+            if(canInt){
+               newArr.push(e);
             }
-         })
-         if(canInt){
-            arr.push(e);
          }
    })
+
 
    console.log(newArr.length,arr.length)
 
@@ -39,5 +45,7 @@ fs.readdir("file",(err,files)=>{
 			   });*/
    		}
    })
+   let time=new Date().getTime()
+   console.log((time-time1)/1000+"s")
   
 })
