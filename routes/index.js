@@ -5,12 +5,16 @@ var http=require("http")
 var request = require('request');
 var iconv = require('iconv-lite');
 var tumblr = require('tumblr.js');
+
+var appKeyList=["MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc",
+"Y6fcF1mgfP80tlsQgQwwXuYM80u3nKlzrYmC8G3D7SKXKmuChz"]
 var client = tumblr.createClient({
   consumer_key: 'MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc',
   consumer_secret: '4Q0aIYPeKXWmvmIgeok43N4DxwIRkMZthUPHncUBZ0yYgGscTy',
   token: 'nHyDBDQiaNgkmVEvCwlRPWB89SMMKkdHKikeHyXwIbf6kenW12',
   token_secret: 'e5tPdEknmpoxrR4wjnDSjPzwjTMMZ1SZGimuZIudgfvS1ddXKw'
 });
+var appKey=appKeyList[1]
 
 var follow=[]
 function getList(i){
@@ -39,10 +43,10 @@ router.get('/list', function(req, res, next) {
 router.get('/getcont', function(req, res, next) {
 	var uri={
 		video:'https://api.tumblr.com/v2/blog/'+req.query.name+
-		'.tumblr.com/posts/video?api_key=MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc&limit='+(req.query.limit||20)+
+		'.tumblr.com/posts/video?api_key='+appKey+'&limit='+(req.query.limit||20)+
 		"&offset="+(req.query.offset||0),
 		photo:'https://api.tumblr.com/v2/blog/'+req.query.name+
-		'.tumblr.com/posts/photo?api_key=MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc&limit='+(req.query.limit||20)+
+		'.tumblr.com/posts/photo?api_key='+appKey+'&limit='+(req.query.limit||20)+
 		"&offset="+(req.query.offset||0),
 	}
 	 request({uri:uri[req.query.type],encoding: null}, function (error, response, body) {
@@ -58,7 +62,7 @@ router.get('/getcont', function(req, res, next) {
 
 router.get('/getLike', function(req, res, next) {
 	 request({uri:"https://api.tumblr.com/v2/blog/"+req.query.name+
-		".tumblr.com/likes?api_key=MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc&limit="+(req.query.limit||20)+
+		".tumblr.com/likes?api_key="+appKey+"&limit="+(req.query.limit||20)+
 		"&before="+(req.query.time||0),encoding: null}, function (error, response, body) {
 	    var html1=iconv.decode(body, 'utf8');
   		res.send(html1);

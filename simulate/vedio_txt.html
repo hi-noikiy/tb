@@ -22,12 +22,29 @@
 	var limit=1;
 	var size=20;
 	var ajaxIng=false,count=0,failLimit=[];
-	$("#get").click(function(){
+	var name=getUrlParam("name")
+
+
+	if(name!="null"){
+		$("#name").val(name)
 		limit=1;
-			getCont()
+		getCont()
+	}
+
+	$("#get").click(function(){
+		if(location.href.indexOf("auto")!=-1){
+			$("#list li").each(function(i,e){
+				window.open('./vedio_txt.html?name='+$(this).html(),$(this).html())
+			})
+		}else{
+		limit=1;
+		getCont()
+
+		}
 	})
+
 	function getCont(){
-			var type=$("#type").val()
+			var type=$("#type").val();
 			ajaxIng=true;
 			$.ajax({
 				url:"/getcont",
@@ -50,11 +67,7 @@
 								name:$("#name").val()
 							}
 						}).done(function(d){
-							if(location.href.indexOf("auto")!=-1){
-								$("#list li[rel='"+$("#name").val()+"']").next().click();
-										limit=1;
-										getCont()
-							}
+							window.close()
 						})
 						return
 					}
