@@ -14,7 +14,7 @@ var client = tumblr.createClient({
   token: 'nHyDBDQiaNgkmVEvCwlRPWB89SMMKkdHKikeHyXwIbf6kenW12',
   token_secret: 'e5tPdEknmpoxrR4wjnDSjPzwjTMMZ1SZGimuZIudgfvS1ddXKw'
 });
-var appKey=appKeyList[1]
+var appKey=appKeyList[0]
 
 var follow=[]
 function getList(i){
@@ -54,9 +54,12 @@ router.get('/getcont', function(req, res, next) {
 	 		console.log("ERROR:",error)
 	 		res.send(error);
 	 	}else{
-	    var html1=iconv.decode(body, 'utf8');
+	    var html1=JSON.parse(iconv.decode(body, 'utf8'));
+	    	if(html1.meta.status=="429"){
+	    		appKey=appKeyList[1]
+	    	}
   			res.send(html1);
-	 	}
+  		}
 	});
 });
 
