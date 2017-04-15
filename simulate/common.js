@@ -8,7 +8,7 @@ $(function(){
 			url:"/list"
 		}).done(function(d){
 			var htmlList=d.map(function(e){
-				return "<li rel='"+e+"'>"+e+"</li>"
+				return "<li rel='"+e.type+"'>"+e.name+"</li>"
 			})
 			$("#list").html(htmlList.join(" "))
 		});
