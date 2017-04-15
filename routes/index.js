@@ -5,6 +5,7 @@ var http=require("http")
 var request = require('request');
 var iconv = require('iconv-lite');
 var tumblr = require('tumblr.js');
+var debug = require('debug')('my:index');
 
 var appKeyList=["MTSQG9xC2tAAgK6y8AHKvVFpI3QGIKPRDx9O0Iybpfls3DTfYc",
 "Y6fcF1mgfP80tlsQgQwwXuYM80u3nKlzrYmC8G3D7SKXKmuChz"]
@@ -14,17 +15,32 @@ var client = tumblr.createClient({
   token: 'nHyDBDQiaNgkmVEvCwlRPWB89SMMKkdHKikeHyXwIbf6kenW12',
   token_secret: 'e5tPdEknmpoxrR4wjnDSjPzwjTMMZ1SZGimuZIudgfvS1ddXKw'
 });
-var appKey=appKeyList[1]
+var appKey=appKeyList[0]
 
 var follow=[]
 function getList(i){
 	client.userFollowing({offset:(i*20),limit:20},function(err, data) {
 		if(data.blogs.length>0){
 			data.blogs.forEach(function(e){
-				follow.push(e.name)
+				follow.push({name:e.name,type:"new"})
 			})
-			console.log(i)
 			getList(i+1)
+		}else{
+			var oldFollows=fs.readFileSync("data/follows.txt");
+			fs.writeFileSync("data/follows.txt",JSON.stringify(follow))
+			console.log("old start")
+				debug("old start")
+			if(follow.length>=oldFollows.length){
+				debug("follow>oldFollows")
+				follow.forEach((e,i)=>{
+					oldFollows.forEach((q,w)=>{
+						if(e.name==q.name){
+							e.type="old"
+						}
+					})
+				})
+			}
+			console.log("list ok")
 		}
 	});
 }
@@ -54,9 +70,12 @@ router.get('/getcont', function(req, res, next) {
 	 		console.log("ERROR:",error)
 	 		res.send(error);
 	 	}else{
-	    var html1=iconv.decode(body, 'utf8');
+	    var html1=JSON.parse(iconv.decode(body, 'utf8'));
+	    	if(html1.meta.status=="429"){
+	    		appKey=appKeyList[1]
+	    	}
   			res.send(html1);
-	 	}
+  		}
 	});
 });
 

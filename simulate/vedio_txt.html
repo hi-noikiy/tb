@@ -11,6 +11,7 @@
 	
 	<input type="text" id="name" value="">
 	<button id="get">获取</button>
+	<button id="stop">停止</button>
 
 	<ul id="list" class="list"></ul>
 	<ul id="cont">
@@ -23,7 +24,7 @@
 	var size=20;
 	var ajaxIng=false,count=0,failLimit=[];
 	var name=getUrlParam("name")
-
+	var going=true;
 
 	if(name!="null"){
 		$("#name").val(name)
@@ -42,6 +43,9 @@
 
 		}
 	})
+	$("#stop").click(function(){
+		going=false;
+	});
 
 	function getCont(){
 			var type=$("#type").val();
@@ -56,33 +60,26 @@
 				}
 			}).done(function(d){
 				try{
-					var data=JSON.parse(d).response.posts,html=""
-					count==0?count=JSON.parse(d).response.total_posts:"";
-					if(data.length<1){
-						$.ajax({
-							method:"post",
-							url:"/saveHtml",
-							data:{
-								html:$("#cont").html().replace(/https:\/\/vtt.tumblr.com/g,"*")+"<li>"+failLimit.join(",")+"</li>",
-								name:$("#name").val()
-							}
-						}).done(function(d){
-							window.close()
-						})
-						return
-					}
+					var data=d.response.posts,html=""
+					count==0?count=d.response.total_posts:"";
 					for(var i=0,l=data.length;i<l;i++){
 						var obj=data[i]
 						if(obj.video_url){
 							html+='<li>'+obj.video_url+'</li>';
 						}
 					}
+					if(data.length<1||!going){
+						saveHtml()
+						return
+					}
 					if(limit>1){
 						$("#cont").append(html)
 					}else{
 						$("#cont").html(html)
 					}
-					limit++
+					if(d.meta.status!="429"){
+						limit++
+					}
 					getCont()
 				}catch(e){
 					limit++
@@ -96,5 +93,18 @@
 				getCont()*/
 			})
 		}
+
+	function saveHtml(){
+		$.ajax({
+			method:"post",
+			url:"/saveHtml",
+			data:{
+				html:$("#cont").html().replace(/https:\/\/vtt.tumblr.com/g,"*")+"<li>"+failLimit.join(",")+"</li>",
+				name:$("#name").val()
+			}
+		}).done(function(d){
+			window.close()
+		})
+	}
 </script>
 </html>

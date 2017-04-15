@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\soft\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'debug' ]
+2 info using npm@3.10.6
+3 info using node@v6.2.0
+4 verbose run-script [ 'predebug', 'debug', 'postdebug' ]
+5 info lifecycle my@0.0.0~predebug: my@0.0.0
+6 silly lifecycle my@0.0.0~predebug: no script for predebug, continuing
+7 info lifecycle my@0.0.0~debug: my@0.0.0
+8 verbose lifecycle my@0.0.0~debug: unsafe-perm in lifecycle true
+9 verbose lifecycle my@0.0.0~debug: PATH: C:\Users\Administrator\AppData\Roaming\npm\node_modules\npm\bin\node-gyp-bin;E:\gitWeb\tb\node_modules\.bin;C:\Users\Administrator\bin;D:\soft\Git\mingw64\bin;D:\soft\Git\usr\local\bin;D:\soft\Git\usr\bin;D:\soft\Git\usr\bin;D:\soft\Git\mingw64\bin;D:\soft\Git\usr\bin;C:\ProgramData\Oracle\Java\javapath;C:\Ruby22\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;D:\soft\svn\bin;D:\soft\skiSvn\bin;D:\soft\nodejs;D:\apache-ant-1.10.1\bin;C:\Program Files\Java\jre1.8.0_121\bin;C:\Program Files\MySQL\mysql-5.6.24-win32\bin;C:\Users\Administrator\AppData\Roaming\npm;%ANT_HOME\bin;D:\soft\Git\usr\bin\vendor_perl;D:\soft\Git\usr\bin\core_perl
+10 verbose lifecycle my@0.0.0~debug: CWD: E:\gitWeb\tb
+11 silly lifecycle my@0.0.0~debug: Args: [ '/d /s /c', 'DEBUG=my:server node ./bin/www' ]
+12 silly lifecycle my@0.0.0~debug: Returned: code: 1  signal: null
+13 info lifecycle my@0.0.0~debug: Failed to exec debug script
+14 verbose stack Error: my@0.0.0 debug: `DEBUG=my:server node ./bin/www`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\npm\lib\utils\lifecycle.js:255:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\npm\lib\utils\spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:850:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+15 verbose pkgid my@0.0.0
+16 verbose cwd E:\gitWeb\tb
+17 error Windows_NT 6.1.7601
+18 error argv "D:\\soft\\nodejs\\node.exe" "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run" "debug"
+19 error node v6.2.0
+20 error npm  v3.10.6
+21 error code ELIFECYCLE
+22 error my@0.0.0 debug: `DEBUG=my:server node ./bin/www`
+22 error Exit status 1
+23 error Failed at the my@0.0.0 debug script 'DEBUG=my:server node ./bin/www'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the my package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     DEBUG=my:server node ./bin/www
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs my
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls my
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
