@@ -10,7 +10,7 @@ fs.readdir("file",(err,files)=>{
    arr=html.split("</li><li>")
 
    //已下载列表
-   var downArr=fs.readdirSync("D:/bin/bin/tb")
+   var downArr=fs.readdirSync("D:/bin/bin/tb").concat(fs.readdirSync("D:/bin/bin/tb2"))
    console.log(downArr)
 
    //去除非连接
