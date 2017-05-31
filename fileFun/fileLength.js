@@ -1,3 +1,5 @@
+/*运行直接对比本地文件 及抓取目录 剩余未重复的文件*/
+
 var fs=require("fs")
 let time1=new Date().getTime()
 fs.readdir("file",(err,files)=>{
@@ -21,6 +23,7 @@ fs.readdir("file",(err,files)=>{
                }
             })
 
+            //去除已下载链接
             downArr.forEach((q,y)=>{
                if(e.indexOf(q)!=-1){
                   canInt=false;
